@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jelajahi Keberagaman Indonesia - Media Pembelajaran Kelas 3 SD</title>
+    <!-- Google Fonts & Tailwind CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        display: ['Fredoka', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-amber-50 text-slate-800 font-sans min-h-screen flex flex-col">
+
+    <!-- ================= 1. HALAMAN LOGIN ================= -->
+    <div id="login-section" class="flex-1 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full border-4 border-yellow-400 text-center relative overflow-hidden">
+            <div class="absolute -top-10 -right-10 w-32 h-32 bg-yellow-200 rounded-full opacity-50 z-0"></div>
+            <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-orange-200 rounded-full opacity-50 z-0"></div>
+            
+            <div class="relative z-10">
+                <span class="text-5xl mb-2 inline-block">🇮🇩</span>
+                <h1 class="font-display text-3xl font-bold text-amber-600 mb-1">Jelajahi Keberagaman Indonesia</h1>
+                <p class="text-sm text-slate-600 mb-6">Pendidikan Kewarganegaraan Kelas III SD/MI<br><b>"Berbeda Itu Indah"</b></p>
+                
+                <form id="login-form" class="space-y-4 text-left">
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-1">Nama Lengkap Siswa:</label>
+                        <input type="text" id="student-name" required placeholder="Contoh: Budi Santoso" class="w-full px-4 py-3 rounded-xl border-2 border-amber-300 focus:outline-none focus:border-amber-500 text-lg">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-1">Kelas:</label>
+                        <input type="text" id="student-class" required placeholder="Contoh: Kelas 3A" class="w-full px-4 py-3 rounded-xl border-2 border-amber-300 focus:outline-none focus:border-amber-500 text-lg">
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-display text-xl py-3 rounded-xl shadow-lg transition transform hover:-translate-y-0.5">
+                        Mulai Berpetualang 🚀
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= 2. DASHBOARD / APLIKASI UTAMA ================= -->
+    <div id="main-app" class="hidden flex-1 flex flex-col">
+        <!-- Header -->
+        <header class="bg-amber-600 text-white shadow-md p-4 sticky top-0 z-50">
+            <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <span class="text-3xl">🏝️</span>
+                    <div>
+                        <h2 class="font-display text-xl font-bold">Jelajahi Keberagaman Indonesia</h2>
+                        <p class="text-xs text-amber-100">Halo, <span id="display-name" class="font-bold"></span> (<span id="display-class"></span>)</p>
+                    </div>
+                </div>
+                <nav class="flex space-x-2 mt-2 sm:mt-0 overflow-x-auto py-1">
+                    <button onclick="switchTab('dashboard')" class="nav-btn bg-amber-700 px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-amber-800 transition">Menu Utama</button>
+                    <button onclick="switchTab('materi')" class="nav-btn px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-amber-700 transition">Materi Budaya</button>
+                    <button onclick="switchTab('kuis')" class="nav-btn px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-amber-700 transition">Kuis Kartu</button>
+                    <button onclick="switchTab('hasil')" class="nav-btn px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-amber-700 transition">Hasil Belajar</button>
+                    <button onclick="switchTab('tentang')" class="nav-btn px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-amber-700 transition">Tentang</button>
+                    <button onclick="logout()" class="bg-red-500 px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-red-600 transition">Keluar</button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Container Konten -->
+        <main class="flex-1 max-w-6xl w-full mx-auto p-4 sm:p-6">
+
+            <!-- TAB 1: DASHBOARD -->
+            <div id="tab-dashboard" class="space-y-6">
+                <div class="bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-3xl p-6 sm:p-8 shadow-lg flex flex-col md:flex-row items-center justify-between">
+                    <div class="space-y-3 mb-4 md:mb-0">
+                        <span class="bg-white/20 text-white text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider">Bab 3 - Fase B Kelas 3 SD</span>
+                        <h2 class="font-display text-3xl sm:text-4xl font-bold">Selamat Datang di Dunia Kebhinekaan!</h2>
+                        <p class="text-amber-100 max-w-xl text-sm sm:text-base">Mari belajar mengenal kekayaan suku bangsa, rumah adat, tarian tradisional, makanan daerah, dan baju adat Indonesia dengan cara yang seru dan menyenangkan.</p>
+                    </div>
+                    <div class="text-6xl sm:text-8xl animate-bounce">🏛️</div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div onclick="switchTab('materi')" class="bg-white p-6 rounded-2xl shadow border-b-4 border-amber-500 cursor-pointer hover:shadow-md transition transform hover:-translate-y-1">
+                        <span class="text-4xl mb-3 block">📚</span>
+                        <h3 class="font-display font-bold text-lg text-slate-800">Materi Budaya</h3>
+                        <p class="text-xs text-slate-500 mt-1">Pelajari Bhinneka Tunggal Ika, rumah adat, tarian, dll.</p>
+                    </div>
+                    <div onclick="switchTab('kuis')" class="bg-white p-6 rounded-2xl shadow border-b-4 border-orange-500 cursor-pointer hover:shadow-md transition transform hover:-translate-y-1">
+                        <span class="text-4xl mb-3 block">🎴</span>
+                        <h3 class="font-display font-bold text-lg text-slate-800">Kuis Kartu Acak</h3>
+                        <p class="text-xs text-slate-500 mt-1">Uji pemahamanmu lewat 10 kartu soal pilihan ganda.</p>
+                    </div>
+                    <div onclick="switchTab('hasil')" class="bg-white p-6 rounded-2xl shadow border-b-4 border-emerald-500 cursor-pointer hover:shadow-md transition transform hover:-translate-y-1">
+                        <span class="text-4xl mb-3 block">🏆</span>
+                        <h3 class="font-display font-bold text-lg text-slate-800">Hasil Belajar</h3>
+                        <p class="text-xs text-slate-500 mt-1">Lihat skor kuis dan penghargaan lencanamu.</p>
+                    </div>
+                    <div onclick="switchTab('tentang')" class="bg-white p-6 rounded-2xl shadow border-b-4 border-blue-500 cursor-pointer hover:shadow-md transition transform hover:-translate-y-1">
+                        <span class="text-4xl mb-3 block">💡</span>
+                        <h3 class="font-display font-bold text-lg text-slate-800">Tentang Media</h3>
+                        <p class="text-xs text-slate-500 mt-1">Informasi pembuat dan tujuan pembelajaran.</p>
+                    </div>
+                </div>
+
+                <!-- Bagian Pengantar Materi Singkat -->
+                <div class="bg-white rounded-2xl p-6 shadow space-y-3">
+                    <h3 class="font-display text-xl font-bold text-amber-700 flex items-center">
+                        <span class="mr-2">✨</span> Makna Bhinneka Tunggal Ika
+                    </h3>
+                    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+                        Bangsa Indonesia adalah bangsa yang besar dan terdiri atas beragam suku, budaya, agama, serta kepercayaan. Namun, bangsa Indonesia memiliki persatuan dan kesatuan yang sangat kuat. Hal tersebut tercermin dari semboyan negara kita yaitu <b>Bhinneka Tunggal Ika</b>, yang memiliki arti <b>"berbeda-beda tetapi tetap satu jua"</b>.
+                    </p>
+                </div>
+            </div>
+
+            <!-- TAB 2: MATERI BUDAYA -->
+            <div id="tab-materi" class="hidden space-y-6">
+                <div class="bg-white p-6 rounded-2xl shadow">
+                    <h2 class="font-display text-2xl font-bold text-amber-700 mb-2">Materi Kekayaan Budaya Indonesia</h2>
+                    <p class="text-xs text-slate-500 mb-6 bg-amber-50 p-3 rounded-xl border border-amber-200">💡 *Pilih kategori di bawah ini. Klik pada judul materi budaya yang berwarna biru untuk membuka poster Canva spesifik!*</p>
+                    
+                    <!-- Sub Navigasi Kategori Materi -->
+                    <div class="flex flex-wrap gap-2 mb-6 border-b pb-4">
+                        <button onclick="filterMateri('bhinneka')" id="btn-bhinneka" class="materi-tab-btn bg-amber-600 text-white px-4 py-2 rounded-xl text-sm font-bold shadow">🇮🇩 Bhinneka Tunggal Ika</button>
+                        <button onclick="filterMateri('rumah')" id="btn-rumah" class="materi-tab-btn bg-slate-200 text-slate-700 px-4 py-2 rounded-xl text-sm font-bold hover:bg-amber-100">🏠 Rumah Adat</button>
+                        <button onclick="filterMateri('tari')" id="btn-tari" class="materi-tab-btn bg-slate-200 text-slate-700 px-4 py-2 rounded-xl text-sm font-bold hover:bg-amber-100">💃 Tarian Daerah</button>
+                        <button onclick="filterMateri('makanan')" id="btn-makanan" class="materi-tab-btn bg-slate-200 text-slate-700 px-4 py-2 rounded-xl text-sm font-bold hover:bg-amber-100">🍲 Makanan Tradisional</button>
+                        <button onclick="filterMateri('baju')" id="btn-baju" class="materi-tab-btn bg-slate-200 text-slate-700 px-4 py-2 rounded-xl text-sm font-bold hover:bg-amber-100">👗 Baju Adat</button>
+                        <button onclick="filterMateri('lagu')" id="btn-lagu" class="materi-tab-btn bg-slate-200 text-slate-700 px-4 py-2 rounded-xl text-sm font-bold hover:bg-amber-100">🎶 Lagu Daerah & YouTube</button>
+                    </div>
+
+                    <!-- Area Tampil Konten Materi -->
+                    <div id="materi-content-area" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Konten akan dimuat lewat JavaScript sesuai kategori -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: KUIS KARTU ACAK (FLIP CARDS) -->
+            <div id="tab-kuis" class="hidden space-y-6">
+                <div class="bg-white p-6 rounded-2xl shadow text-center">
+                    <h2 class="font-display text-2xl font-bold text-amber-700 mb-2">Kuis Kartu Acak (Flip Card Quiz)</h2>
+                    <p class="text-sm text-slate-600 mb-6">Pilih salah satu dari 10 kartu angka di bawah ini secara acak, buka kartunya, dan jawab soal pilihan gandanya!</p>
+                    
+                    <div class="flex justify-between items-center mb-4 bg-amber-50 p-3 rounded-xl">
+                        <span class="font-bold text-amber-800">Soal Terjawab: <span id="quiz-progress">0</span> / 10</span>
+                        <span class="font-bold text-emerald-700">Skor Kamu: <span id="quiz-score">0</span></span>
+                    </div>
+
+                    <!-- Grid 10 Kartu Angka -->
+                    <div id="card-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+                        <!-- Kartu akan di-generate oleh JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: HASIL BELAJAR -->
+            <div id="tab-hasil" class="hidden space-y-6">
+                <div class="bg-white p-6 rounded-2xl shadow text-center max-w-lg mx-auto">
+                    <span class="text-6xl mb-3 block">🏆</span>
+                    <h2 class="font-display text-2xl font-bold text-amber-700 mb-2">Hasil Belajar Siswa</h2>
+                    <div class="bg-amber-50 p-6 rounded-2xl my-4 space-y-3">
+                        <p class="text-sm text-slate-600">Nama: <b id="result-name" class="text-slate-800"></b></p>
+                        <p class="text-sm text-slate-600">Kelas: <b id="result-class" class="text-slate-800"></b></p>
+                        <div class="text-4xl font-display font-bold text-amber-600 my-2" id="result-score-val">0 / 100</div>
+                        <p id="result-badge" class="font-bold text-sm text-emerald-600"></p>
+                    </div>
+                    <button onclick="switchTab('kuis')" class="bg-amber-600 hover:bg-amber-700 text-white font-display px-6 py-2.5 rounded-xl shadow">Ulangi Kuis 🔄</button>
+                </div>
+            </div>
+
+            <!-- TAB 5: TENTANG MEDIA -->
+            <div id="tab-tentang" class="hidden space-y-6">
+                <div class="bg-white p-6 rounded-2xl shadow space-y-4">
+                    <h2 class="font-display text-2xl font-bold text-amber-700">Tentang Media Pembelajaran</h2>
+                    <div class="space-y-2 text-sm sm:text-base text-slate-700">
+                        <p><b>Nama Pengembang:</b> Loka Dewi Kalila (NIM: 24104080003)</p>
+                        <p><b>Fase / Kelas:</b> Fase B / Kelas III SD/MI</p>
+                        <p><b>Mata Pelajaran:</b> Pendidikan Kewarganegaraan (Bab 3: Berbeda itu Indah)</p>
+                        <p><b>Capaian Pembelajaran:</b> Peserta didik mampu mengenali dan menghargai keberagaman budaya, suku bangsa, dan bahasa di lingkungan sekitar dalam Bhinneka Tunggal Ika.</p>
+                        <p><b>Tujuan Pembelajaran:</b> Peserta didik dapat mengidentifikasi, membedakan, dan menghargai identitas diri, keluarga, dan teman-temannya sesuai budaya, suku bangsa, dan bahasa di lingkungan rumah, sekolah, dan masyarakat.</p>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- MODAL SOAL KUIS (POPUP KARTU) -->
+    <div id="quiz-modal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border-4 border-amber-400 relative">
+            <h3 id="modal-card-title" class="font-display text-lg font-bold text-amber-700 mb-2">Soal Kuis</h3>
+            <p id="modal-question" class="text-slate-800 font-medium mb-4 text-sm sm:text-base"></p>
+            <div id="modal-options" class="space-y-2 mb-4">
+                <!-- Pilihan Ganda -->
+            </div>
+            <div id="modal-feedback" class="text-sm font-bold mb-4 hidden"></div>
+            <button id="modal-close-btn" onclick="closeQuizModal()" class="w-full bg-slate-300 hover:bg-slate-400 text-slate-800 font-bold py-2 rounded-xl hidden">Tutup Kartu</button>
+        </div>
+    </div>
+
+    <!-- SCRIPT LOGIKA APLIKASI -->
+    <script>
+        let studentData = { name: '', className: '', score: 0, answeredCount: 0 };
+
+        // Data Materi dengan Penambahan Kategori Bhinneka Tunggal Ika & Perbedaan Suku/Adat
+        const materiData = {
+            bhinneka: [
+                { 
+                    judul: "Apa itu Bhinneka Tunggal Ika?", 
+                    ciri: "Bhinneka Tunggal Ika adalah semboyan negara Indonesia yang tercetak pada lambang Garuda Pancasila. Artinya adalah 'berbeda-beda tetapi tetap satu jua'. Meskipun kita memiliki suku, bahasa, dan budaya yang berbeda, kita tetap satu bangsa yaitu bangsa Indonesia." 
+                },
+                { 
+                    judul: "Keberagaman Suku Bangsa di Indonesia", 
+                    ciri: "Indonesia memiliki ratusan suku bangsa yang tersebar dari Sabang sampai Merauke. Setiap suku memiliki keunikan tersendiri seperti bahasa daerah, tradisi, dan kebiasaan yang hidup rukun berdampingan." 
+                },
+                { 
+                    judul: "Perbedaan Adat Istiadat & Budaya", 
+                    ciri: "Perbedaan adat istiadat terlihat dari bentuk rumah adat, pakaian tradisional, tarian daerah, hingga makanan khas. Perbedaan ini bukanlah alasan untuk terpecah belah, melainkan anugerah yang membuat Indonesia kaya dan indah." 
+                },
+                { 
+                    judul: "Sikap Saling Menghargai dalam Perbedaan", 
+                    ciri: "Sebagai anak Indonesia yang hebat, kita harus saling menghormati teman yang berbeda suku atau budaya. Dengan sikap saling menghargai, tercipta persatuan, kedamaian, dan kerukunan di sekolah maupun di lingkungan rumah." 
+                }
+            ],
+            rumah: [
+                { judul: "Bali (Suku Bali)", linkCanva: "https://canva.link/55gtt7vq6arppp3", ciri: "Memiliki Gapura Bentar atau Angkul-Angkul sebagai pintu masuk. Bangunan terpisah-pisah dalam satu pekarangan, banyak ukiran bermakna simbolis, bentuk persegi/persegi panjang, serta memiliki area suci (Pura Keluarga)." },
+                { judul: "Sumatra Barat (Rumah Gadang)", linkCanva: "https://canva.link/wfnyeu4nnk7q4wg", ciri: "Berbentuk panggung dengan ciri khas atap yang melengkung menyerupai tanduk kerbau." },
+                { judul: "Papua (Honai - Suku Asmat)", linkCanva: "https://canva.link/ri3f1uq81dgbppl", ciri: "Bentuk lingkaran seperti jamur dengan atap kerucut dari jerami. Pintu kecil untuk menjaga kehangatan, tanpa jendela agar suhu stabil. Lantai bawah untuk tidur, lantai atas untuk aktivitas, serta terdapat Hipere (tungku api) di tengah." },
+                { judul: "Sunda (Jawa Barat)", linkCanva: "https://canva.link/7h4cww4y8ktjs9s", ciri: "Jenis rumah paling sederhana di pedesaan. Atap berbentuk pelana memanjang tanpa ornamen rumit. Ruangan terdiri dari teras (emper), ruang tengah (patengahan), kamar (pangkeng), dapur (pawon), dan tempat beras (padaringan)." },
+                { judul: "Jawa (Joglo - Jawa Tengah & Timur)", linkCanva: "https://canva.link/i60vss622luyb13", ciri: "Bentuk atap mengerucut melambangkan kedekatan dengan Tuhan. Struktur terbuka mencerminkan keterbukaan sosial dan semangat musyawarah. Tata letak simetris menggambarkan keseimbangan lahir-batin dan hubungan dengan alam." },
+                { judul: "Sulawesi Selatan (Rumah Tongkonan)", linkCanva: "https://canva.link/9hjdys4gbmecty9", ciri: "Rumah adat Toraja yang memiliki bentuk atap melengkung mirip perahu, dihiasi ukiran khas berwarna merah, hitam, dan kuning, serta tanduk kerbau di bagian depan." }
+            ],
+            tari: [
+                { judul: "Tari Saman (Aceh)", linkCanva: "https://canva.link/8nh3u74d9rzxsbp", ciri: "Formasi duduk berbaris lurus mirip posisi shalat, dipimpin oleh seorang syekh. Gerakan utamanya meliputi tepuk tangan, tepuk dada, guncang, kirep, lingang, dan surang-saring menggunakan bahasa Gayo." },
+                { judul: "Tari Piring (Sumatra Barat)", linkCanva: "https://canva.link/o34ror2xs34bpm0", ciri: "Menggunakan piring sebagai properti utama di atas telapak tangan, digerakkan mengikuti irama musik tanpa menjatuhkan piring tersebut." },
+                { judul: "Tari Pendet (Bali)", linkCanva: "https://canva.link/as3rb8fqpsutnw5", ciri: "Awalnya bersifat sakral sebagai persembahan kepada dewa, kini berfungsi sebagai tarian penyambutan tamu dengan gerakan indah dan simbolik." },
+                { judul: "Tari Serimpi (Jawa Tengah)", linkCanva: "https://canva.link/he8qx4r4897ifot", ciri: "Tari klasik dari zaman kerajaan dengan gerakan yang sangat halus dan bernilai simbolis tinggi, berfungsi sebagai pengiring upacara kerajaan Mataram." },
+                { judul: "Tari Jaipong (Jawa Barat)", linkCanva: "https://canva.link/pnrxx220mscsef0", ciri: "Berkembang dalam kebudayaan Sunda dengan ciri gerakan dinamis, ekspresif, ritme kuat, serta hubungan erat antara gerakan penari dan bunyi kendang." }
+            ],
+            makanan: [
+                { judul: "Rendang (Sumatra Barat)", linkCanva: "https://canva.link/3c5xbn35kjjkb0k", ciri: "Hidangan daging sapi, kerbau, ayam, atau bebek yang dimasak lama dengan santan dan beragam rempah, menghasilkan tekstur empuk dan aroma khas." },
+                { judul: "Gudeg (Yogyakarta)", linkCanva: "https://canva.link/7mvz4bwo7qdsx5l", ciri: "Terbuat dari nangka muda (gori) yang dimasak dengan santan, memiliki cita rasa dominan manis." },
+                { judul: "Papeda (Papua & Maluku)", linkCanva: "https://canva.link/l4ohit1shs9lesn", ciri: "Bubur sagu berwarna putih dengan tekstur lengket menyerupai lem dan rasa tawar, disajikan dengan ikan tongkol/bubara kuah kuning." },
+                { judul: "Pempek (Palembang)", linkCanva: "https://canva.link/29peqplev81rlxd", ciri: "Terbuat dari daging ikan tenggiri atau gabus yang digiling lembut, dicampur tepung kanji/sagu, bawang putih, dan garam." }
+            ],
+            baju: [
+                { judul: "Ulos & Busana Batak (Sumatra Utara)", linkCanva: "https://canva.link/w8cahhuemxsrk2t", ciri: "Menggunakan kain tradisional Ulos dengan motif dan warna khas untuk kegiatan adat seperti pernikahan, kelahiran, dan upacara kematian." },
+                { judul: "Kebaya & Beskap (Jawa & Sunda)", linkCanva: "https://canva.link/m6up9wofvww47xw", ciri: "Kebaya adalah blus tradisional perempuan, sedangkan beskap adalah busana resmi pria Jawa mirip jas (Surakarta), dipadukan dengan kain jarit dan blangkon." },
+                { judul: "Baju Bodo (Sulawesi Selatan)", linkCanva: "https://canva.link/y2mthsyxgyn29kh", ciri: "Pakaian tradisional perempuan Suku Bugis & Makassar yang dipasangkan dengan Lipa Sabbe (sarung sutra khas Sengkang, Wajo)." },
+                { judul: "Payas Alit (Bali)", linkCanva: "https://canva.link/2hxoqe66j8oa8r0", ciri: "Baju adat Bali yang paling sederhana untuk sehari-hari atau upacara harian di pura. Wanita mengenakan kebaya/songket, pria mengenakan kemeja putih, kamen, dan udeng." }
+            ],
+            lagu: [
+                { judul: "Ampar-Ampar Pisang (Kalimantan Selatan)", link: "https://www.youtube.com/results?search_query=lagu+daerah+ampar+ampar+pisang", desc: "Mari bernyanyi bersama guru dan teman-teman untuk melestarikan lagu daerah!" },
+                { judul: "Suwe Ora Jamu (Jawa Tengah)", link: "https://www.youtube.com/results?search_query=lagu+daerah+suwe+ora+jamu", desc: "Mari bernyanyi bersama guru dan teman-teman untuk melestarikan lagu daerah!" },
+                { judul: "Apuse (Papua)", link: "https://www.youtube.com/results?search_query=lagu+daerah+apuse", desc: "Mari bernyanyi bersama guru dan teman-teman untuk melestarikan lagu daerah!" },
+                { judul: "Manuk Dadali (Jawa Barat)", link: "https://www.youtube.com/results?search_query=lagu+daerah+manuk+dadali", desc: "Mari bernyanyi bersama guru dan teman-teman untuk melestarikan lagu daerah!" }
+            ]
+        };
+
+        const quizData = [
+            { id: 1, q: "Bentuk atap mengerucut pada rumah Joglo (Jawa) melambangkan...", options: ["Kedekatan dengan Tuhan", "Kekayaan harta", "Kecepatan angin", "Kemegahan istana"], answer: 0 },
+            { id: 2, q: "Apa ciri khas pintu rumah adat Honai dari Papua?", options: ["Pintu sangat besar", "Pintu kecil untuk menjaga kehangatan", "Terbuat dari kaca", "Dilengkapi lift"], answer: 1 },
+            { id: 3, q: "Dari provinsi manakah asal Tari Saman dengan formasi duduk berbaris?", options: ["Bali", "Aceh", "Jawa Barat", "Papua"], answer: 1 },
+            { id: 4, q: "Properti utama yang digunakan oleh penari Tari Piring adalah...", options: ["Lilin", "Piring", "Selendang", "Payung"], answer: 1 },
+            { id: 5, q: "Makanan khas Sumatra Barat yang dimasak lama dengan santan dan rempah adalah...", options: ["Gudeg", "Papeda", "Rendang", "Pempek"], answer: 2 },
+            { id: 6, q: "Papeda adalah makanan khas berupa bubur sagu yang berasal dari...", options: ["Papua dan Maluku", "Jakarta", "Bali", "Aceh"], answer: 0 },
+            { id: 7, q: "Pakaian tradisional atau kain khas dari masyarakat Batak (Sumatra Utara) disebut...", options: ["Ulos", "Kebaya", "Baju Bodo", "Beskap"], answer: 0 },
+            { id: 8, q: "Baju Bodo adalah pakaian tradisional perempuan dari suku...", options: ["Bugis & Makassar", "Jawa", "Sunda", "Asmat"], answer: 0 },
+            { id: 9, q: "Apa arti dari semboyan negara kita Bhinneka Tunggal Ika?", options: ["Bersatu kita teguh", "Berbeda-beda tetapi tetap satu jua", "Berbeda itu berbahaya", "Indonesia tanah airku"], answer: 1 },
+            { id: 10, q: "Atap rumah Gadang dari Sumatra Barat menyerupai bentuk...", options: ["Tanduk kerbau", "Atap sekolah", "Perahu layar", "Kubah masjid"], answer: 0 }
+        ];
+
+        let answeredQuestions = {};
+
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('student-name').value.trim();
+            const className = document.getElementById('student-class').value.trim();
+            
+            if(name && className) {
+                studentData.name = name;
+                studentData.className = className;
+                document.getElementById('display-name').innerText = name;
+                document.getElementById('display-class').innerText = className;
+                
+                document.getElementById('login-section').classList.add('hidden');
+                document.getElementById('main-app').classList.remove('hidden');
+                switchTab('dashboard');
+                initQuizCards();
+            }
+        });
+
+        function logout() {
+            if(confirm('Keluar dari sesi belajar?')) {
+                location.reload();
+            }
+        }
+
+        function switchTab(tabId) {
+            ['dashboard', 'materi', 'kuis', 'hasil', 'tentang'].forEach(t => {
+                document.getElementById(`tab-${t}`).classList.add('hidden');
+            });
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+
+            if(tabId === 'materi') {
+                filterMateri('bhinneka');
+            }
+            if(tabId === 'hasil') {
+                updateResultView();
+            }
+        }
+
+        function filterMateri(kategori) {
+            // Update warna tombol navigasi kategori
+            ['bhinneka', 'rumah', 'tari', 'makanan', 'baju', 'lagu'].forEach(k => {
+                let btn = document.getElementById(`btn-${k}`);
+                if(k === kategori) {
+                    btn.className = "materi-tab-btn bg-amber-600 text-white px-4 py-2 rounded-xl text-sm font-bold shadow";
+                } else {
+                    btn.className = "materi-tab-btn bg-slate-200 text-slate-700 px-4 py-2 rounded-xl text-sm font-bold hover:bg-amber-100";
+                }
+            });
+
+            const area = document.getElementById('materi-content-area');
+            area.innerHTML = '';
+
+            materiData[kategori].forEach(item => {
+                let card = document.createElement('div');
+                card.className = "bg-amber-50/60 p-5 rounded-2xl border-2 border-amber-200 shadow-sm flex flex-col justify-between";
+                
+                if(kategori === 'lagu') {
+                    card.innerHTML = `
+                        <div>
+                            <h4 class="font-display font-bold text-lg text-amber-800 mb-1">🎶 ${item.judul}</h4>
+                            <p class="text-xs text-slate-600 mb-4">${item.desc}</p>
+                        </div>
+                        <a href="${item.link}" target="_blank" class="inline-block bg-red-600 hover:bg-red-700 text-white text-center font-bold py-2 px-4 rounded-xl text-sm transition">
+                            ▶️ Buka Video YouTube
+                        </a>
+                    `;
+                } else if(kategori === 'bhinneka') {
+                    card.innerHTML = `
+                        <div>
+                            <h4 class="font-display font-bold text-lg text-amber-800 mb-2">✨ ${item.judul}</h4>
+                            <p class="text-sm text-slate-700 leading-relaxed">${item.ciri}</p>
+                        </div>
+                    `;
+                } else {
+                    card.innerHTML = `
+                        <div>
+                            <h4 class="font-display font-bold text-lg text-amber-800 mb-2">
+                                📌 <a href="${item.linkCanva}" target="_blank" class="text-blue-600 hover:underline underline cursor-pointer" title="Klik untuk buka poster Canva">${item.judul} ↗️</a>
+                            </h4>
+                            <p class="text-sm text-slate-700 leading-relaxed">${item.ciri}</p>
+                        </div>
+                    `;
+                }
+                area.appendChild(card);
+            });
+        }
+
+        function initQuizCards() {
+            const grid = document.getElementById('card-grid');
+            grid.innerHTML = '';
+
+            quizData.forEach((q, index) => {
+                let card = document.createElement('div');
+                card.className = "bg-gradient-to-br from-amber-500 to-orange-500 text-white p-6 rounded-2xl shadow-md cursor-pointer flex flex-col items-center justify-center text-center h-28 hover:scale-105 transition transform font-display font-bold text-2xl";
+                card.id = `quiz-card-${q.id}`;
+                
+                if(answeredQuestions[q.id]) {
+                    card.className = "bg-slate-200 text-slate-400 p-6 rounded-2xl shadow-sm flex flex-col items-center justify-center text-center h-28 font-display font-bold text-sm cursor-not-allowed";
+                    card.innerHTML = `<span>✅ Selesai</span><span class="text-xs font-normal mt-1">Kartu ${index + 1}</span>`;
+                } else {
+                    card.innerHTML = `<span>${index + 1}</span><span class="text-xs font-normal mt-1 opacity-90">Buka Kartu</span>`;
+                    card.onclick = () => openQuizModal(q);
+                }
+                grid.appendChild(card);
+            });
+
+            document.getElementById('quiz-progress').innerText = studentData.answeredCount;
+            document.getElementById('quiz-score').innerText = studentData.score;
+        }
+
+        let currentActiveQuestion = null;
+
+        function openQuizModal(q) {
+            currentActiveQuestion = q;
+            document.getElementById('modal-card-title').innerText = `Kartu Soal Nomor ${q.id}`;
+            document.getElementById('modal-question').innerText = q.q;
+            
+            const optionsArea = document.getElementById('modal-options');
+            optionsArea.innerHTML = '';
+            
+            q.options.forEach((opt, idx) => {
+                let btn = document.createElement('button');
+                btn.className = "w-full text-left bg-amber-50 hover:bg-amber-100 border-2 border-amber-200 p-3 rounded-xl text-sm font-semibold text-slate-700 transition";
+                btn.innerText = `${String.fromCharCode(65 + idx)}. ${opt}`;
+                btn.onclick = () => checkAnswer(idx, q.id);
+                optionsArea.appendChild(btn);
+            });
+
+            document.getElementById('modal-feedback').classList.add('hidden');
+            document.getElementById('modal-close-btn').classList.add('hidden');
+            document.getElementById('quiz-modal').classList.remove('hidden');
+        }
+
+        function checkAnswer(selectedIndex, qId) {
+            const q = quizData.find(item => item.id === qId);
+            const feedback = document.getElementById('modal-feedback');
+            feedback.classList.remove('hidden');
+
+            const buttons = document.getElementById('modal-options').querySelectorAll('button');
+            buttons.forEach(b => b.disabled = true);
+
+            if(selectedIndex === q.answer) {
+                feedback.className = "text-sm font-bold mb-4 text-emerald-600";
+                feedback.innerText = "🎉 Pintar sekali! Jawaban kamu benar!";
+                studentData.score += 10;
+            } else {
+                feedback.className = "text-sm font-bold mb-4 text-rose-600";
+                feedback.innerText = `❌ Kurang tepat. Jawaban yang benar adalah: ${q.options[q.answer]}`;
+            }
+
+            answeredQuestions[qId] = true;
+            studentData.answeredCount++;
+            
+            document.getElementById('quiz-progress').innerText = studentData.answeredCount;
+            document.getElementById('quiz-score').innerText = studentData.score;
+            document.getElementById('modal-close-btn').classList.remove('hidden');
+            initQuizCards();
+        }
+
+        function closeQuizModal() {
+            document.getElementById('quiz-modal').classList.add('hidden');
+        }
+
+        function updateResultView() {
+            document.getElementById('result-name').innerText = studentData.name || '-';
+            document.getElementById('result-class').innerText = studentData.className || '-';
+            document.getElementById('result-score-val').innerText = `${studentData.score} / 100`;
+
+            let badge = document.getElementById('result-badge');
+            if(studentData.score >= 80) {
+                badge.innerText = "🌟 Luar Biasa! Kamu Anak Hebat yang Sangat Menghargai Keberagaman!";
+            } else if(studentData.score >= 50) {
+                badge.innerText = "👍 Bagus! Ayo pelajari lagi materinya agar nilaimu makin sempurna.";
+            } else {
+                badge.innerText = "💪 Tetap semangat! Coba baca kembali materi budaya Nusantara ya.";
+            }
+        }
+    </script>
+</body>
+</html>
